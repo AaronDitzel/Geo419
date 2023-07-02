@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
 
-# Funktion, die überprüft, ob eine ZIP-Datei im angegebenen Verzeichnis existiert
+# Funktion, die überprüft, ob eine ZIP-Datei im angegebenen Verzeichnis existiert (directory -- Pfad zum Verzeichnis (string))
 def check_zip_file(directory):
     if not os.path.exists(directory):
         print(f"Das Verzeichnis {directory} existiert nicht.")
@@ -31,7 +31,7 @@ def check_zip_file(directory):
     else:
         print("Es wurden keine ZIP-Archive gefunden.")
 
-# Funktion zum Herunterladen einer ZIP-Datei von einer URL
+# Funktion zum Herunterladen einer ZIP-Datei von einer URL (string)
 def download_zip(url, directory):
     filename = url.split("/")[-1]
     file_path = os.path.join(directory, filename)
@@ -50,7 +50,7 @@ def download_zip(url, directory):
     else:
         print("Es gab einen Fehler beim Herunterladen der Datei. Bitte überprüfen Sie die URL.")
 
-# Funktion zum Überprüfen, ob eine GeoTiff-Datei im angegebenen Verzeichnis existiert
+# Funktion zum Überprüfen, ob eine GeoTiff-Datei im angegebenen Verzeichnis existiert (string)
 def check_geotiff_file(directory, geotiff_name):
     if not os.path.exists(directory):
         print(f"Das Verzeichnis {directory} existiert nicht.")
@@ -63,7 +63,7 @@ def check_geotiff_file(directory, geotiff_name):
     else:
         print(f"Die GeoTiff-Datei {geotiff_name} wurde nicht gefunden.")
 
-# Funktion zum Entpacken einer GeoTiff-Datei, falls sie sich in einer ZIP-Datei befindet
+# Funktion zum Entpacken einer GeoTiff-Datei, falls sie sich in einer ZIP-Datei befindet (string)
 def unzip_geotiff_if_needed(directory, geotiff_name):
     files = os.listdir(directory)
 
@@ -81,7 +81,7 @@ def unzip_geotiff_if_needed(directory, geotiff_name):
 
     print(f"Die GeoTiff-Datei {geotiff_name} wurde in keinem der ZIP-Archive gefunden.")
 
-# Funktion zur Bearbeitung einer GeoTiff-Datei
+# Funktion zur Bearbeitung einer GeoTiff-Datei (string)
 def process_image(input_path=None, output_path=None):
     if input_path is None:
         input_path = input("Bitte geben Sie den Pfad zur Eingabedatei ein: ")
@@ -110,7 +110,7 @@ def process_image(input_path=None, output_path=None):
 
     return output_path
 
-# Funktion zum Anzeigen einer GeoTiff-Datei
+# Funktion zum Anzeigen einer GeoTiff-Datei (string)
 def plot_image(path=None):
     # Wenn kein Pfad angegeben wurde, wird der Benutzer danach gefragt
     if path is None:
