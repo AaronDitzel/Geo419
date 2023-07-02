@@ -4,7 +4,7 @@ Created on Sat Jul  1 18:11:37 2023
 Dieses Python-Skript hilft Ihnen dabei, GeoTIFF-Bilddaten zu bearbeiten und zu visualisieren, die möglicherweise in ZIP-Archiven verpackt sind.
 @author: Aaron Ditzel
 """
-
+# Importiere die benötigten Module
 import os
 import argparse
 import requests
@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
 
+# Funktion, die überprüft, ob eine ZIP-Datei im angegebenen Verzeichnis existiert
 def check_zip_file(directory):
     if not os.path.exists(directory):
         print(f"Das Verzeichnis {directory} existiert nicht.")
@@ -30,7 +31,7 @@ def check_zip_file(directory):
     else:
         print("Es wurden keine ZIP-Archive gefunden.")
 
-
+# Funktion zum Herunterladen einer ZIP-Datei von einer URL
 def download_zip(url, directory):
     filename = url.split("/")[-1]
     file_path = os.path.join(directory, filename)
@@ -49,7 +50,7 @@ def download_zip(url, directory):
     else:
         print("Es gab einen Fehler beim Herunterladen der Datei. Bitte überprüfen Sie die URL.")
 
-
+# Funktion zum Überprüfen, ob eine GeoTiff-Datei im angegebenen Verzeichnis existiert
 def check_geotiff_file(directory, geotiff_name):
     if not os.path.exists(directory):
         print(f"Das Verzeichnis {directory} existiert nicht.")
@@ -62,7 +63,7 @@ def check_geotiff_file(directory, geotiff_name):
     else:
         print(f"Die GeoTiff-Datei {geotiff_name} wurde nicht gefunden.")
 
-
+# Funktion zum Entpacken einer GeoTiff-Datei, falls sie sich in einer ZIP-Datei befindet
 def unzip_geotiff_if_needed(directory, geotiff_name):
     files = os.listdir(directory)
 
@@ -80,7 +81,7 @@ def unzip_geotiff_if_needed(directory, geotiff_name):
 
     print(f"Die GeoTiff-Datei {geotiff_name} wurde in keinem der ZIP-Archive gefunden.")
 
-
+# Funktion zur Bearbeitung einer GeoTiff-Datei
 def process_image(input_path=None, output_path=None):
     if input_path is None:
         input_path = input("Bitte geben Sie den Pfad zur Eingabedatei ein: ")
@@ -106,7 +107,7 @@ def process_image(input_path=None, output_path=None):
 
     return output_path
 
-
+# Funktion zum Anzeigen einer GeoTiff-Datei
 def plot_image(path=None):
     if path is None:
         path = input("Bitte geben Sie den Pfad zur Bilddatei ein: ")
@@ -136,7 +137,7 @@ def plot_image(path=None):
 
         plt.show()
 
-
+# Hauptfunktion, die die oben definierten Funktionen aufruft
 def main(directory=None, geotiff_name=None, zip_url=None):
     if directory is None:
         directory = input("Bitte geben Sie das Verzeichnis ein, in dem nach ZIP-Archiven gesucht werden soll: ")
@@ -161,10 +162,13 @@ def main(directory=None, geotiff_name=None, zip_url=None):
     plot_image(processed_image_path)
 
 
+# Aufruf des Skript
 if __name__ == "__main__":
+    # ArgumentParser wird zum Verarbeiten der Befehlszeilenargumente verwendet
     parser = argparse.ArgumentParser(description="Überprüft, ob ein ZIP-Archiv und eine GeoTiff-Datei in einem Verzeichnis vorhanden sind und lädt sie herunter.")
     parser.add_argument("directory", nargs='?', default=None, help="Das Verzeichnis, in dem nach ZIP-Archiven gesucht werden soll.")
     parser.add_argument("geotiff_name", nargs='?', default=None, help="Der Name der GeoTiff-Datei, die verarbeitet werden soll.")
     parser.add_argument("zip_url", nargs='?', default=None, help="Die URL der ZIP-Datei, die heruntergeladen werden soll.")
     args = parser.parse_args()
+    # Aufruf der Hauptfunktion mit den über die Befehlszeile übergebenen Argumenten
     main(args.directory, args.geotiff_name, args.zip_url)
