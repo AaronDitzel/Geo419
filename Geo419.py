@@ -112,32 +112,39 @@ def process_image(input_path=None, output_path=None):
 
 # Funktion zum Anzeigen einer GeoTiff-Datei
 def plot_image(path=None):
+    # Wenn kein Pfad angegeben wurde, wird der Benutzer danach gefragt
     if path is None:
         path = input("Bitte geben Sie den Pfad zur Bilddatei ein: ")
-
+        
+    # Die Bilddatei wird geöffnet und in eine Matrix geladen
     with rasterio.open(path) as src:
         img_array = src.read(1)
 
+        # Maske für fehlende Daten erstellen
         mask = img_array == src.nodata
 
+        # Farbschema für die Anzeige festlegen
         cmap = 'terrain'
 
-        plt.figure(figsize=(10, 8))
-        plt.imshow(img_array, cmap=cmap)
-        plt.colorbar(label='dB')
-        plt.title('Rückstreuintensität (dB)')
+        plt.figure(figsize=(10, 8))                         # Erstellen einer neuen Matplotlib-Figur
+        plt.imshow(img_array, cmap=cmap)                    # Anzeigen des Bildes mit dem festgelegten Farbschema
+        plt.colorbar(label='dB')                            # Hinzufügen einer Farbleiste
+        plt.title('Rückstreuintensität (dB)')               # Setzen des Titels des Plots
         plt.xlabel('X-Koordinate')
         plt.ylabel('Y-Koordinate')
-        plt.gca().set_aspect('equal', adjustable='box')
+        plt.gca().set_aspect('equal', adjustable='box')     # Festlegen des Aspekts des Plots
         plt.gca().xaxis.set_major_locator(plt.MaxNLocator(5))
         plt.gca().yaxis.set_major_locator(plt.MaxNLocator(5))
         plt.gca().set_xticklabels([int(x) for x in plt.gca().get_xticks()], rotation=45)
         plt.gca().set_yticklabels([int(y) for y in plt.gca().get_yticks()])
 
+        # Anwendung der Maske auf das Bild
         img_array = np.ma.masked_where(mask, img_array)
 
+        # Anzeigen des maskierten Bildes
         plt.imshow(img_array, cmap=cmap, alpha=0.7)
 
+        # Visualisierung
         plt.show()
 
 # Hauptfunktion, die die oben definierten Funktionen aufruft
