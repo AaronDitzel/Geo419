@@ -43,8 +43,8 @@ def download_zip(url, directory):
     print(f"Lade Datei von {url} herunter...")
     response = requests.get(url)
 
-    if response.status_code == 200:
-        with open(file_path, 'wb') as f:
+    if response.status_code == 200: #Http Code 200 = Anfrage erfolgreich
+        with open(file_path, 'wb') as f: # Öffnen der Datei im Write-Binary-Modus
             f.write(response.content)
         print(f"Die Datei wurde erfolgreich als {filename} im Verzeichnis {directory} gespeichert.")
     else:
@@ -88,22 +88,25 @@ def process_image(input_path=None, output_path=None):
     if output_path is None:
         output_path = input("Bitte geben Sie den Pfad zur Ausgabedatei ein: ")
 
+    # Die Eingabedatei wird geöffnet und in eine Matrix geladen
     with rasterio.open(input_path) as src:
         img_array = src.read(1)
 
-        img_array = img_array + 1e-10
+        img_array = img_array + 1e-10 # Verhindert Division durch Null in der folgenden Berechnung
 
+         # Fortschrittsbalken für den Benutzer
         with tqdm(total=100, desc='Bild wird geladen', unit='%') as pbar:
             img_array_db = 10 * np.log10(img_array)
 
+            # Schreiben der umgewandelten Matrix in die Ausgabedatei
             with rasterio.open(
                 output_path, 'w', driver='GTiff', height=img_array_db.shape[0],
                 width=img_array_db.shape[1], count=1, dtype=img_array_db.dtype,
                 crs=src.crs, transform=src.transform
             ) as dst:
                 dst.write(img_array_db, 1)
-
-            pbar.update(100)
+            
+            pbar.update(100)  # Aktualisierung des Fortschrittsbalkens
 
     return output_path
 
