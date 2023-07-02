@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jul  1 18:11:37 2023
-
-@author: aaron
+Dieses Python-Skript hilft Ihnen dabei, GeoTIFF-Bilddaten zu bearbeiten und zu visualisieren, die möglicherweise in ZIP-Archiven verpackt sind.
+@author: Aaron Ditzel
 """
 
 import os
