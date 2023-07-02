@@ -39,4 +39,4 @@ Wenn Sie das Skript ohne Argumente ausführen, werden Sie zur Eingabe der benöt
 6. Das bearbeitete GeoTIFF-Bild wird angezeigt.
 
 ### Erfolgreiche Visualisierung
-(![Download (4)](https://github.com/AaronDitzel/Geo419/assets/103928784/1d18d97d-6026-4d5c-8fc8-ace476dfc8c1)
+![Download (4)](https://github.com/AaronDitzel/Geo419/assets/103928784/1d18d97d-6026-4d5c-8fc8-ace476dfc8c1)
