@@ -4,14 +4,16 @@ Dieses Python-Skript hilft Ihnen dabei, GeoTIFF-Bilddaten zu bearbeiten und zu v
 ## Anforderungen
 Stellen Sie sicher, dass Sie folgende Python-Pakete installiert haben:
 
-os
-argparse
-requests
-zipfile
-rasterio
-matplotlib
-numpy
-tqdm
+| Paket   | Description |
+| ----------- | ----------- |
+os | Interaktion mit dem Betriebssystem.
+argparse | Verarbeitung von Befehlszeilenargumenten.
+requests | Senden und Empfangen von HTTP-Anfragen.
+zipfile | Lesen und Schreiben von ZIP-Archiven.
+rasterio | Verarbeitung von geospatialen Rasterdaten.
+matplotlib | Erstellung von statischen, animierten und interaktiven Visualisierungen.
+numpy | Wissenschaftliche Berechnungen mit Python.
+tqdm |  Fortschrittsbalken für Python-Loops.
 
 Diese können Sie installieren mit:
 
@@ -35,3 +37,6 @@ Wenn Sie das Skript ohne Argumente ausführen, werden Sie zur Eingabe der benöt
 4. Falls die GeoTIFF-Datei in einem ZIP-Archiv gefunden wurde, wird sie entpackt.
 5. Das GeoTIFF-Bild wird bearbeitet und das Ergebnis wird als neues GeoTIFF-Bild gespeichert.
 6. Das bearbeitete GeoTIFF-Bild wird angezeigt.
+
+### Erfolgreiche Visualisierung
+(![Download (4)](https://github.com/AaronDitzel/Geo419/assets/103928784/1d18d97d-6026-4d5c-8fc8-ace476dfc8c1)
